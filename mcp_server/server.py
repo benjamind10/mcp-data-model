@@ -1,6 +1,7 @@
 # mcp_server/server.py
 
 from fastapi import FastAPI, Query, HTTPException, Request
+from fastapi.middleware.cors import CORSMiddleware
 from pydantic import BaseModel
 from typing import List, Dict, Any
 import json
@@ -23,6 +24,15 @@ app = FastAPI(
     version="0.1.0",
 )
 
+# Add CORS middleware for MCP Inspector
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=["*"],  # Allow all origins for development
+    allow_credentials=True,
+    allow_methods=["*"],  # Allow all HTTP methods
+    allow_headers=["*"],  # Allow all headers
+)
+
 # Known OPC UA servers
 KNOWN_SERVERS = [
     "opc.tcp://localhost:4840",
@@ -39,6 +49,12 @@ class ServerList(BaseModel):
 @app.get("/")
 def health() -> Dict[str, Any]:
     return {"ok": True, "name": "MCP Server", "version": "0.1.0"}
+
+
+@app.options("/")
+async def options_handler():
+    """Handle CORS preflight requests"""
+    return {}
 
 
 @app.get("/servers")

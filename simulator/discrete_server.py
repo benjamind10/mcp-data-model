@@ -24,7 +24,7 @@ class DiscreteProcessSimulator:
     def _setup_lines(self):
         factory = self.server.nodes.objects.add_object(self.idx, "BoardDeckAssembly")
 
-        for i in range(1, 6):
+        for i in range(1, 11):
             line_name = f"AssemblyLine{i}"
             line = factory.add_object(self.idx, line_name)
 

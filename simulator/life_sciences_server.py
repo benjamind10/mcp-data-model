@@ -28,7 +28,7 @@ class LifeSciencesServer:
             self.idx, "LifeSciencesFacility"
         )
 
-        for i in range(1, 6):
+        for i in range(1, 11):
             room_name = f"ProcessRoom{i}"
             room = facility.add_object(self.idx, room_name)
 

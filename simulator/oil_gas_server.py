@@ -30,7 +30,7 @@ class OilAndGasSimulator:
     def _setup_lines(self):
         plant = self.server.nodes.objects.add_object(self.idx, "OilAndGasPlant")
 
-        for i in range(1, 6):  # 5 lines
+        for i in range(1, 11):  # 10 lines for ~100 tags
             line_name = f"Line{i}"
             line = plant.add_object(self.idx, line_name)
 
